@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Guessing Game</title>
+  <link rel="stylesheet" href="num-guess-style.css">
+
+  <title class="Mainmenu_button">Game Zone Button</title>
+  <style>
+    .welcome-bar {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; 
+        }
+
+        .menu-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            border-radius: 3px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+</style>
+</head>
+<body>
+
+  <h1>Number Guessing Game</h1>
+
+  <p>I'm thinking of a number between 1 and 100. Can you guess it?</p>
+  <input type="number" id="guessInput" min="1" max="100">
+  <button id="guessButton">Guess</button>
+  <p id="guessMessage"></p>
+  
+  <button class="menu-button" onclick="window.location.href = 'index.html'">Menu</button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const guessInput = document.getElementById('guessInput');
+      const guessButton = document.getElementById('guessButton');
+      const guessMessage = document.getElementById('guessMessage');
+      const secretNumber = Math.floor(Math.random() * 100) + 1;
+      let guessesRemaining = 7;
+
+      guessButton.addEventListener('click', () => {
+        const guess = parseInt(guessInput.value);
+
+        if (isNaN(guess) || guess < 1 || guess > 100) {
+          guessMessage.textContent = "Please enter a valid number between 1 and 100.";
+          return;
+        }
+
+        guessesRemaining--;
+
+        if (guess === secretNumber) {
+          guessMessage.textContent = `Congratulations! You guessed the number in ${7 - guessesRemaining} guesses.`;
+          guessButton.disabled = true;
+        } else if (guess < secretNumber) {
+          guessMessage.textContent = `Too low! You have ${guessesRemaining} guesses remaining.`;
+        } else {
+          guessMessage.textContent = `Too high! You have ${guessesRemaining} guesses remaining.`;
+        }
+
+        if (guessesRemaining === 0) {
+          guessMessage.textContent = `You ran out of guesses. The number was ${secretNumber}.`;
+          guessButton.disabled = true;
+        }
+
+        guessInput.value = '';
+      });
+    });
+  </script>
+</body>
+</html>

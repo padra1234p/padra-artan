@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minigame Zone</title>
+  <link rel="stylesheet" href="main-style.css">
+</head>
+<body>
+
+  <h1>Welcome to the Minigame Zone!</h1>
+
+  <div class="game-list">
+    <div class="game-card" data-game="number-guessing">
+      <img src="number-guessing-icon.png" alt="Number Guessing Game">
+      <h2>Number Guessing</h2>
+      <p>Try to guess the hidden number!</p>
+      <button class="play-button">Play</button>
+    </div>
+
+    <div class="game-card" data-game="memory-match">
+      <img src="memory-match-icon.png" alt="Memory Match Game">
+      <h2>Memory Match</h2>
+      <p>Flip the cards and match the pairs.</p>
+      <button class="play-button">Play</button>
+    </div>
+
+
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const gameCards = document.querySelectorAll('.game-card');
+
+      gameCards.forEach(card => {
+        card.querySelector('.play-button').addEventListener('click', () => {
+          const gameType = card.dataset.game;
+          window.location.href = `${gameType}.html`; 
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
